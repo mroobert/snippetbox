@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"fmt"
-	"html/template"
 	"net/http"
 	"strconv"
 
@@ -16,31 +15,13 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Initialize a slice containing the paths to the two files. Note that the
-	// home.page.tmpl file must be the *first* file in the slice.
-	files := []string{
-		"./ui/html/home.page.html",
-		"./ui/html/base.layout.html",
-		"./ui/html/footer.partial.html",
-	}
-
-	// Use the template.ParseFiles() function to read the template file into a
-	// template set. If there's an error, we log the detailed error message and use
-	// the http.Error() function to send a generic 500 Internal Server Error
-	// response to the user.
-	templateSet, err := template.ParseFiles(files...)
-	if err != nil {
-		app.serverError(w, err)
+	latestSnippets, err := app.snippets.Latest()
+    if err != nil {
+    	app.serverError(w, err)
 		return
-	}
+    }
 
-	// We then use the Execute() method on the template set to write the template
-	// content as the response body. The last parameter to Execute() represents any
-	// dynamic data that we want to pass in, which for now we'll leave as nil.
-	err = templateSet.Execute(w, nil)
-	if err != nil {
-		app.serverError(w, err)
-	}
+	app.render(w,r, "home.page.html", templateData{Snippets: latestSnippets})
 }
 
 func (app *application) showSnippet(w http.ResponseWriter, r *http.Request) {
@@ -59,9 +40,8 @@ func (app *application) showSnippet(w http.ResponseWriter, r *http.Request) {
         }
         return
     }
-
-    // Write the snippet data as a plain-text HTTP response body.
-    fmt.Fprintf(w, "%v", snippet)
+	
+	app.render(w,r, "show.page.html", templateData{Snippet: snippet})
 }
 
 func (app *application) createSnippet(w http.ResponseWriter, r *http.Request) {
