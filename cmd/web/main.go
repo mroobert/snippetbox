@@ -36,9 +36,9 @@ func main() {
 	dsn := flag.String("dsn", "root:root@tcp(localhost:3306)/snippetbox?parseTime=true", "MySQL data source name")
 
 	// The role of the flag.Parse() function is to parse the command-line flag.
-	// This reads in the command-line flag value and assigns it to the addr
-	// variable. You need to call this *before* you use the addr variable
-	// otherwise it will always contain the default value of ":4000". If any errors are
+	// This reads in the command-line flag values and assigns them to the
+	// variables above. You need to call this *before* you use the variables
+	// otherwise it will always contain the default value. If any errors are
 	// encountered during parsing the application will be terminated.
 	flag.Parse()
 
