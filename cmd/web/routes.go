@@ -3,9 +3,11 @@ package main
 import (
 	"net/http"
 	"path/filepath"
+
+	"github.com/justinas/alice"
 )
 
-func (app *application) routes() *http.ServeMux {
+func (app *application) routes() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", app.home)
 	mux.HandleFunc("/snippet", app.showSnippet)
@@ -20,7 +22,13 @@ func (app *application) routes() *http.ServeMux {
 	// "/static" prefix before the request reaches the file server.
 	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
 
-	return mux
+	//without alice package
+	//return app.recoverPanic(app.logRequest(secureHeaders(mux)))
+
+	// Create a middleware chain containing our 'standard' middleware
+	// which will be used for every request our application receives.
+	standardMiddleware := alice.New(app.recoverPanic, app.logRequest, secureHeaders)
+	return standardMiddleware.Then(mux)
 }
 
 type unexposedFileSystem struct {
