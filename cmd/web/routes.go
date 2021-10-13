@@ -4,31 +4,31 @@ import (
 	"net/http"
 	"path/filepath"
 
+	"github.com/julienschmidt/httprouter"
 	"github.com/justinas/alice"
 )
 
 func (app *application) routes() http.Handler {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/", app.home)
-	mux.HandleFunc("/snippet", app.showSnippet)
-	mux.HandleFunc("/snippet/create", app.createSnippet)
 
-	// Create a file server which serves files out of the "./ui/static" directory.
-	// Note that the path given to the http.Dir function is relative to the project
-	// directory root.
-	fileServer := http.FileServer(unexposedFileSystem{http.Dir("./ui/static/")})
-	// Use the mux.Handle() function to register the file server as the handler for
-	// all URL paths that start with "/static/". For matching paths, we strip the
-	// "/static" prefix before the request reaches the file server.
-	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
+	router := httprouter.New()
+
+	router.HandlerFunc(http.MethodGet, "/", app.home)
+
+	router.HandlerFunc(http.MethodPost, "/snippet", app.createSnippet)
+	router.HandlerFunc(http.MethodGet, "/snippet", app.showSnippetForm)
+	router.HandlerFunc(http.MethodGet, "/snippet/:id", app.showSnippet)
+
+	// Use the router.ServeFiles() function to register the file server as the handler for
+	// all URL paths that start with "/static/".
+	router.ServeFiles("/static/*filepath", unexposedFileSystem{http.Dir("./ui/static/")})
 
 	//without alice package
-	//return app.recoverPanic(app.logRequest(secureHeaders(mux)))
+	//return app.recoverPanic(app.logRequest(secureHeaders(router)))
 
 	// Create a middleware chain containing our 'standard' middleware
 	// which will be used for every request our application receives.
 	standardMiddleware := alice.New(app.recoverPanic, app.logRequest, secureHeaders)
-	return standardMiddleware.Then(mux)
+	return standardMiddleware.Then(router)
 }
 
 type unexposedFileSystem struct {

@@ -1,0 +1,85 @@
+<mxfile host="65bd71144e">
+    <diagram id="sy_KA45IQ6C24UrGMouo" name="Page-1">
+        <mxGraphModel dx="848" dy="1627" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bac8d3;strokeColor=#23445d;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="480" width="650" height="450" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="&lt;b style=&quot;color: rgb(0 , 0 , 0) ; font-size: 23px&quot;&gt;Method&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="490" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="&lt;b style=&quot;color: rgb(0 , 0 , 0) ; font-size: 23px&quot;&gt;Pattern&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;" parent="1" vertex="1">
+                    <mxGeometry x="170" y="490" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="&lt;b style=&quot;color: rgb(0 , 0 , 0) ; font-size: 23px&quot;&gt;Handler&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;" parent="1" vertex="1">
+                    <mxGeometry x="305" y="490" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="&lt;b&gt;&lt;font style=&quot;font-size: 23px&quot; color=&quot;#000000&quot;&gt;Action&lt;/font&gt;&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fad7ac;strokeColor=#b46504;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="490" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="&lt;font color=&quot;#000000&quot; size=&quot;1&quot;&gt;&lt;b style=&quot;font-size: 18px&quot;&gt;GET&lt;/b&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="570" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="&lt;b style=&quot;color: rgb(0 , 0 , 0) ; font-size: 18px&quot;&gt;GET&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="640" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="&lt;b style=&quot;color: rgb(0 , 0 , 0) ; font-size: 18px&quot;&gt;GET&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="710" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="&lt;font color=&quot;#000000&quot;&gt;&lt;span style=&quot;font-size: 18px&quot;&gt;&lt;b&gt;POST&lt;/b&gt;&lt;/span&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="780" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="&lt;b style=&quot;color: rgb(0 , 0 , 0) ; font-size: 18px&quot;&gt;GET&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="850" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="&lt;font color=&quot;#000000&quot; size=&quot;1&quot;&gt;&lt;b style=&quot;font-size: 15px&quot;&gt;/&lt;/b&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="170" y="570" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="&lt;font color=&quot;#000000&quot; size=&quot;1&quot;&gt;&lt;b style=&quot;font-size: 15px&quot;&gt;home&lt;/b&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="305" y="570" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="&lt;span style=&quot;font-size: 16px ; text-align: left&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;Display the home page&lt;/font&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="570" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="&lt;font color=&quot;#000000&quot; size=&quot;1&quot;&gt;&lt;b style=&quot;font-size: 15px&quot;&gt;/snippet/:id&lt;/b&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="170" y="640" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="&lt;b style=&quot;color: rgb(0 , 0 , 0) ; font-size: 15px&quot;&gt;/snippet&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="170" y="710" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="&lt;b style=&quot;color: rgb(0 , 0 , 0) ; font-size: 15px&quot;&gt;/snippet&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="170" y="780" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="&lt;b style=&quot;color: rgb(0 , 0 , 0) ; font-size: 15px&quot;&gt;/static/&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="170" y="850" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="&lt;font color=&quot;#000000&quot; size=&quot;1&quot;&gt;&lt;b style=&quot;font-size: 15px&quot;&gt;showSnippet&lt;/b&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="305" y="640" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="&lt;font color=&quot;#000000&quot; size=&quot;1&quot;&gt;&lt;b style=&quot;font-size: 12px&quot;&gt;createSnippetForm&lt;/b&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="305" y="710" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="&lt;font color=&quot;#000000&quot;&gt;&lt;span style=&quot;font-size: 18px&quot;&gt;&lt;b style=&quot;font-size: 15px&quot;&gt;createSnippet&lt;/b&gt;&lt;/span&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="305" y="780" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="&lt;font color=&quot;#000000&quot; size=&quot;1&quot;&gt;&lt;b style=&quot;font-size: 15px&quot;&gt;http.FileServer&lt;/b&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="305" y="850" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="&lt;span style=&quot;font-size: 16px ; text-align: left&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;Display a specific snippet&lt;/font&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="640" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="&lt;span style=&quot;font-size: 16px ; text-align: left&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;Display the snippet form&lt;/font&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="710" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="&lt;span style=&quot;font-size: 16px ; text-align: left&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;Create a new snippet&lt;/font&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="780" width="230" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="&lt;span style=&quot;font-size: 16px ; text-align: left&quot;&gt;&lt;font color=&quot;#000000&quot;&gt;Serve a specific static file&lt;/font&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B3B3B3;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="850" width="230" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
