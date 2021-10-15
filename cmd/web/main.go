@@ -7,8 +7,10 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/golangcollege/sessions"
 	"github.com/mroobert/snippetbox/pkg/models/mysql"
 )
 
@@ -35,6 +37,11 @@ func main() {
 	//which instructs our driver to convert SQL TIME and DATE fields to Go time.Time objects.
 	dsn := flag.String("dsn", "root:root@tcp(localhost:3306)/snippetbox?parseTime=true", "MySQL data source name")
 
+	// Define a new command-line flag for the session secret (a random key which
+	// will be used to encrypt and authenticate session cookies). It should be 32
+	// bytes long.
+	secret := flag.String("secret", "s6Ndh+pPbnzHbS*+9Pk8qGWhTzbpa@ge", "Secret key")
+
 	// The role of the flag.Parse() function is to parse the command-line flag.
 	// This reads in the command-line flag values and assigns them to the
 	// variables above. You need to call this *before* you use the variables
@@ -44,25 +51,30 @@ func main() {
 
 	// Initialize a db connections pool
 	db, err := openDB(*dsn)
-    if err != nil {
-        errorLog.Fatal(err)
-    }
+	if err != nil {
+		errorLog.Fatal(err)
+	}
 
-    // We also defer a call to db.Close(), so that the connection pool is closed
-    // before the main() function exits.
-    defer db.Close()
+	// We also defer a call to db.Close(), so that the connection pool is closed
+	// before the main() function exits.
+	defer db.Close()
 
 	// Initialize a new template cache...
-    templateCache, err := newTemplateCache("./ui/html/")
-    if err != nil {
-        errorLog.Fatal(err)
-    }
+	templateCache, err := newTemplateCache("./ui/html/")
+	if err != nil {
+		errorLog.Fatal(err)
+	}
+
+	// Initialize a new session manager
+	session := sessions.New([]byte(*secret))
+	session.Lifetime = 12 * time.Hour
 
 	// Initialize a new instance of application containing the dependencies.
 	app := &application{
-		errorLog: errorLog,
-		infoLog:  infoLog,
-		snippets: &mysql.SnippetModel{DB: db},
+		errorLog:      errorLog,
+		infoLog:       infoLog,
+		session:       session,
+		snippets:      &mysql.SnippetModel{DB: db},
 		templateCache: templateCache,
 	}
 
@@ -81,22 +93,22 @@ func main() {
 }
 
 type application struct {
-	errorLog *log.Logger
-	infoLog  *log.Logger
-	snippets *mysql.SnippetModel
+	errorLog      *log.Logger
+	infoLog       *log.Logger
+	session       *sessions.Session
+	snippets      *mysql.SnippetModel
 	templateCache map[string]*template.Template
 }
-
 
 // The openDB() function wraps sql.Open() and returns a sql.DB connection pool
 // for a given DSN.
 func openDB(dsn string) (*sql.DB, error) {
-    db, err := sql.Open("mysql", dsn)
-    if err != nil {
-        return nil, err
-    }
-    if err = db.Ping(); err != nil {
-        return nil, err
-    }
-    return db, nil
+	db, err := sql.Open("mysql", dsn)
+	if err != nil {
+		return nil, err
+	}
+	if err = db.Ping(); err != nil {
+		return nil, err
+	}
+	return db, nil
 }

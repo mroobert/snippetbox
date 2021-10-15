@@ -10,13 +10,17 @@ import (
 
 func (app *application) routes() http.Handler {
 
+	// Create a new middleware chain containing the middleware specific to
+	// our dynamic application routes.
+	dynamicMiddleware := alice.New(app.session.Enable)
+
 	router := httprouter.New()
 
-	router.HandlerFunc(http.MethodGet, "/", app.home)
+	router.Handler(http.MethodGet, "/", dynamicMiddleware.ThenFunc(app.home))
 
-	router.HandlerFunc(http.MethodPost, "/snippet", app.createSnippet)
-	router.HandlerFunc(http.MethodGet, "/snippet", app.showSnippetForm)
-	router.HandlerFunc(http.MethodGet, "/snippet/:id", app.showSnippet)
+	router.Handler(http.MethodPost, "/snippet", dynamicMiddleware.ThenFunc(app.createSnippet))
+	router.Handler(http.MethodGet, "/snippet", dynamicMiddleware.ThenFunc(app.showSnippetForm))
+	router.Handler(http.MethodGet, "/snippet/:id", dynamicMiddleware.ThenFunc(app.showSnippet))
 
 	// Use the router.ServeFiles() function to register the file server as the handler for
 	// all URL paths that start with "/static/".
