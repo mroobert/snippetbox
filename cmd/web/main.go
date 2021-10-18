@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/tls"
 	"database/sql"
 	"flag"
 	"html/template"
@@ -78,17 +79,29 @@ func main() {
 		templateCache: templateCache,
 	}
 
+	tlsConfig := &tls.Config{
+		// Causes servers to use Go's default ciphersuite preferences,
+		// which are tuned to avoid attacks. Does nothing on clients.
+		PreferServerCipherSuites: true,
+		// Only use curves which have assembly implementations
+		CurvePreferences: []tls.CurveID{tls.X25519, tls.CurveP256},
+	}
+
 	// Initialize a new http.Server struct. We set the Addr and Handler fields so
 	// that the server uses the network address from command line and the routes we defined, and set
 	// the ErrorLog field so that the server now uses the custom errorLog logger(and not the standard one) in
 	// the event of any problems.
 	httpServer := &http.Server{
-		Addr:     *addr,
-		ErrorLog: errorLog,
-		Handler:  app.routes(),
+		Addr:         *addr,
+		ErrorLog:     errorLog,
+		Handler:      app.routes(),
+		TLSConfig:    tlsConfig,
+		IdleTimeout:  time.Minute,
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 10 * time.Second,
 	}
 	infoLog.Printf("Starting server on %s", *addr)
-	err = httpServer.ListenAndServe()
+	err = httpServer.ListenAndServeTLS("./tls/cert.pem", "./tls/key.pem")
 	errorLog.Fatal(err)
 }
 
