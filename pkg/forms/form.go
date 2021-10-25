@@ -2,6 +2,7 @@ package forms
 
 import (
 	"fmt"
+	"net/mail"
 	"net/url"
 	"strings"
 	"unicode/utf8"
@@ -37,13 +38,25 @@ func (f *Form) Required(fields ...string) {
 
 // Checks that a specific field in the form contains a maximum number of characters.
 // If the check fails then add the appropriate message to the form errors.
-func (f *Form) MaxLength(field string, limit int) {
+func (f *Form) MaxLength(field string, max int) {
 	value := f.Get(field)
 	if value == "" {
 		return
 	}
-	if utf8.RuneCountInString(value) > limit {
-		f.Errors.Add(field, fmt.Sprintf("This field is too long (maximum is %d characters)", limit))
+	if utf8.RuneCountInString(value) > max {
+		f.Errors.Add(field, fmt.Sprintf("This field is too long (maximum is %d characters)", max))
+	}
+}
+
+// Checks that a specific field in the form contains a minimum number of characters.
+// If the check fails then add the appropriate message to the form errors.
+func (f *Form) MinLength(field string, min int) {
+	value := f.Get(field)
+	if value == "" {
+		return
+	}
+	if utf8.RuneCountInString(value) < min {
+		f.Errors.Add(field, fmt.Sprintf("This field is too short (minimum is %d characters)", min))
 	}
 }
 
@@ -66,4 +79,17 @@ func (f *Form) PermittedValues(field string, opts ...string) {
 // Returns true if there are no errors.
 func (f *Form) Valid() bool {
 	return len(f.Errors) == 0
+}
+
+// Returns true if the email address is valid conform RFC 5322 and extended by RFC 6532
+func (f *Form) ParseEmail(field string) {
+	value := f.Get(field)
+	if value == "" {
+		return
+	}
+
+	_, err := mail.ParseAddress(value)
+	if err != nil {
+		f.Errors.Add(field, "Email address is not valid")
+	}
 }

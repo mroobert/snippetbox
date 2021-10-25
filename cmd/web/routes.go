@@ -12,15 +12,21 @@ func (app *application) routes() http.Handler {
 
 	// Create a new middleware chain containing the middleware specific to
 	// our dynamic application routes.
-	dynamicMiddleware := alice.New(app.session.Enable)
+	dynamicMiddleware := alice.New(app.session.Enable, app.checkCSRF)
 
 	router := httprouter.New()
 
 	router.Handler(http.MethodGet, "/", dynamicMiddleware.ThenFunc(app.home))
 
-	router.Handler(http.MethodPost, "/snippet", dynamicMiddleware.ThenFunc(app.createSnippet))
-	router.Handler(http.MethodGet, "/snippet", dynamicMiddleware.ThenFunc(app.showSnippetForm))
+	router.Handler(http.MethodPost, "/snippet", dynamicMiddleware.Append(app.requireAuthentication).ThenFunc(app.createSnippet))
+	router.Handler(http.MethodGet, "/snippet", dynamicMiddleware.Append(app.requireAuthentication).ThenFunc(app.showSnippetForm))
 	router.Handler(http.MethodGet, "/snippet/:id", dynamicMiddleware.ThenFunc(app.showSnippet))
+
+	router.Handler(http.MethodGet, "/user/signup", dynamicMiddleware.ThenFunc(app.showSignupForm))
+	router.Handler(http.MethodPost, "/user/signup", dynamicMiddleware.ThenFunc(app.signupUser))
+	router.Handler(http.MethodGet, "/user/login", dynamicMiddleware.ThenFunc(app.showLoginForm))
+	router.Handler(http.MethodPost, "/user/login", dynamicMiddleware.ThenFunc(app.loginUser))
+	router.Handler(http.MethodPost, "/user/logout", dynamicMiddleware.Append(app.requireAuthentication).ThenFunc(app.logoutUser))
 
 	// Use the router.ServeFiles() function to register the file server as the handler for
 	// all URL paths that start with "/static/".
