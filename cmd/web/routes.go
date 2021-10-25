@@ -12,7 +12,7 @@ func (app *application) routes() http.Handler {
 
 	// Create a new middleware chain containing the middleware specific to
 	// our dynamic application routes.
-	dynamicMiddleware := alice.New(app.session.Enable, app.checkCSRF)
+	dynamicMiddleware := alice.New(app.session.Enable, app.checkCSRF, app.authenticate)
 
 	router := httprouter.New()
 
